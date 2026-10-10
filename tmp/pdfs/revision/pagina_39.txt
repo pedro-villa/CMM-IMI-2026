@@ -1,0 +1,39 @@
+Capítulo 5
+Reto 5
+Qué vamos a hacer
+En este último reto proponemos una serie de generalizaciones del modelo utilizado en los
+Retos 1–4 que acercan el problema a un escenario realista sin perder tratabilidad matemática
+ni computacional. Cada propuesta incluye una motivación física, una formulación concreta y
+una idea de cómo abordarla con las herramientas ya desarrolladas. También discutimos, al final,
+dos extensiones que descartamos por considerarlas poco realistas o incompatibles con la escala
+temporal del modelo.
+5.1. Probabilidades de propagación no constantes
+En los Retos 2–4 se supone quepij es constante durante todo el incendio. En un incendio real, sin
+embargo, la probabilidad de que el fuego salte de la zonai a la zonaj depende de factores que
+evolucionan con el tiempo:
+Viento.La dirección y la intensidad del viento cambian a lo largo del día. Un viento que viene
+del norte durante la etapat hace mucho más probable la propagación hacia el sur en esa etapa
+concreta.
+Humedad y temperatura.La humedad relativa baja drásticamente por la tarde, lo que
+aumenta la probabilidad de ignición de la vegetación vecina.
+Estado del combustible.Una zona que ha estado expuesta al calor radiante de un incendio
+cercano tiene su vegetación más seca, lo que aumentapij en las etapas siguientes.
+Formulación.Sea pij(t)la probabilidad de propagación del arco(i,j )en la etapa t. Se puede
+modelar de varias formas:
+1.Viento dependiente del tiempo.
+pij(t) =F
+(︁
+αw(t)·uij +βij
+)︁
+dondeu ij es el vector unitario dei a j,w( t)es el vector viento en la etapat, βij es una
+constante fija que tiene en cuenta el resto de factores de propagación (pendiente, combustible,
+elevación, etc.) yFes una función que normaliza las probabilidades.
+2.Fuego cercano en el pasado.
+Para ofrecer un modelo sencillo supongamos que en ausencia de fuegos cercanos en el pasado
+la probabilidad base esπij. Si hubo un único fuego cercano tomaremos la nueva probabilidad
+como el punto medio entre 1 (incendio seguro) yπij:
+p′
+ij =γ+ (1−γ)πij
+con γ∈[0, 1]un parámetro relacionado con el peligro que supone un fuego cercano. Para tener
+en cuenta la posibilidad de que haya habido más de un fuego cercano que no ha llegado a
+39

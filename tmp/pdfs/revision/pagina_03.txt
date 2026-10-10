@@ -1,0 +1,34 @@
+Índice general
+1. Reto 1 5
+1.1. El problema . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+1.2. El espacio de probabilidad . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+1.3. Todo incendio se representa eligiendo qué arcos se activan . . . . . . . . . . . . . . . 6
+1.4. ¿Es este el problema real? Las representaciones múltiples . . . . . . . . . . . . . . . . 8
+1.4.1. El problema: un incendio, muchos códigos . . . . . . . . . . . . . . . . . . . . 8
+1.4.2. La solución: no elegir un representante, sino sumar todos . . . . . . . . . . . 9
+1.4.3. La conexión con el enunciado . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+1.5. El objetivoE|Qs|y la fórmula general . . . . . . . . . . . . . . . . . . . . . . . . . . 11
+1.5.1. Las variables del incendio . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
+1.5.2. Etapa a etapa: las fórmulas parat= 0,1,2. . . . . . . . . . . . . . . . . . . 12
+1.5.3. La fórmula general . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
+1.6. El casos= 2: aquí sí se puede calcular la esperanza . . . . . . . . . . . . . . . . . . 13
+1.7. Los cortafuegos: modelo . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14
+1.8. ¿Se generaliza as>2? (entregable 4) . . . . . . . . . . . . . . . . . . . . . . . . . . 15
+1.9. Implementación . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 15
+1.10. Resultados . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16
+2. Reto 2 17
+2.1. Formalización del problema . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
+2.2. Variables binarias acumuladas . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
+2.3. El modelo de optimización . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 19
+2.4. Un ejemplo pequeño . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 20
+2.5. Por qué el modelo proporciona la misma solución óptima que el problema original . 20
+2.5.1. Diferencia (A): presupuesto acumulado . . . . . . . . . . . . . . . . . . . . . . 20
+2.5.2. Diferencia (B): las variablesbpueden exagerar el incendio . . . . . . . . . . . 21
+2.6. El método exacto en la práctica: solución degraph_007. . . . . . . . . . . . . . . . 21
+2.7. ¿Se puede resolver de forma exacta en grafos grandes? . . . . . . . . . . . . . . . . . 22
+2.8. Jerarquía de políticas: rollout . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22
+2.8.1. Los tres niveles de la jerarquía . . . . . . . . . . . . . . . . . . . . . . . . . . 24
+2.8.2. Pseudocódigo . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 24
+2.9. Resultados en los seis grafos . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 25
+2.9.1. La única diferencia: cortar por adelantado engraph_007. . . . . . . . . . . . 26
+3

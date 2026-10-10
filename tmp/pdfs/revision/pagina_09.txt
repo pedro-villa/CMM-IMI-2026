@@ -1,0 +1,81 @@
+1.4. ¿ES ESTE EL PROBLEMA REAL? LAS REPRESENTACIONES MÚLTIPLES9
+1.4.2. La solución: no elegir un representante, sino sumar todos
+Una solucion seria quitar los codigos repetidos y ponderar la probabilidad segun el criterio real, sin
+embargo, existe una solución mas simple: agrupar los códigos de cada incendio. La probabilidad de
+un incendio es la suma de todos los codigos asociados a ese incendio:
+P(Φ =I) :=P
+(︁
+Φ−1(I)
+)︁
+=
+∑︂
+ω∈Φ−1(I)
+P({ω}).
+Que los códigos tengan probabilidades distintas no es un problema: son escenarios de monedas
+distintos que el incendio, simplemente, no distingue. Lo que importa es su suma.
+Veámoslo en el caso más pequeño posible.
+Un ejemplo mínimo: dos zonas.Tomemos un bosque de dos zonas unidas por una arista, es
+decir, con dos arcos,1→2y2 →1(Fig. 1.7). Hay2 ·22 = 8códigos y solo 4 incendios posibles.
+Fijémonos en el incendio «empieza en 1 y quema la 2»,I= ({1},{2},∅). Lo producen exactamente
+dos códigos: uno con una sola flecha y otro con la ida y la vuelta,
+ωα= (1,{1→2}),P(ωα) =π1p12 (1−p21), ω β= (1,{1→2,2→1}),P(ωβ) =π1p12p21.
+En ωβla moneda de vuelta vale 1, pero no tiene ningún efecto: cuando la 2 arde, la 1 ya estaba
+ardiendo. Al sumar,
+P(Φ =I) =P(ωα) +P(ωβ) =π1p12
+[︁
+(1−p21) +p 21
+]︁
+=π1p12.
+Es exactamente lo que da el enunciado ejecutado paso a paso. El fuego empieza en 1 (probabilidad
+π1), el intento1→2tiene éxito (probabilidad p12), y ahí se acaba: la 2 ya no tiene vecinas sin
+quemar, así que el intento2→1nunca llega a hacerse.
+La idea importante aqui es la siguiente:
+La moneda que no influye desaparece al sumar, porque sus dos resultados pesan, juntos,(1−p21) +
+p21 = 1. Con números (π1 = 0.7, p12 = 0.6, p21 = 0.3):0 .294 + 0.126 = 0.420 = 0.7·0.6. La tabla de
+la Fig. 1.7 hace la comprobación completa. Los 8 códigos se agrupan de dos en dos en los 4 incendios,
+cada pareja suma lo que dicta el enunciado, y el total es 1.
+1 2
+1
+0
+ωα
+π1p12(1−p21) = 0.294
+1 2
+1
+1
+ωβ
+π1p12p21 = 0.126
+1 2
+mismo incendio
+({1},{2},∅)
+suma:0.420 =π1p12
+origen arcos activosP(ω)incendio suma enunciado
+1 — 0.196 1 y se apaga 0.28π 1(1−p12) = 0.2812→10.084
+1 1→2 0.294
+1 1→2,2→10.126 1 quema la 2 0.42 π1p12 = 0.42
+2 — 0.084 2 y se apaga 0.21π 2(1−p21) = 0.2121→20.126
+22→10.036 2 quema la 1 0.09π 2p21 = 0.0921→2,2→10.054
+total 1 1 1
+Figura 1.7:Dos zonas: la comprobación completa. Izquierda: los dos códigos del incendio «1 quema la 2»,
+con una flecha y con ida y vuelta. La moneda de vuelta (morado) no influye. Derecha: los 8 códigos (π1 = 0.7,
+π2 = 0.3, p12 = 0.6, p21 = 0.3). En cada incendio, la moneda que no se llega a usar es la del arco de vuelta, y
+al sumar sus dos valores la probabilidad coincide con la del enunciado.
+En grafos mayores pasa lo mismo, solo que con más monedas libres a la vez. Ahora queda formalizar
+este fenómeno para cualquier grafo.
+Proposición 3(Probabilidad de un incendio).Para todoI= (I 0,...,IT )∈IconI0 ={l},
+P(Φ =I) =πl
+T−1∏︂
+t=0
+[︄∏︂
+v∈It+1
+(︂
+1−
+∏︂
+u∈It
+(1−puv)
+)︂∏︂
+v/∈Qt+1
+∏︂
+u∈It
+(1−puv)
+]︄
+.(1.3)

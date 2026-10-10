@@ -1,0 +1,25 @@
+# Revisión estática del Reto 1
+
+No se han ejecutado scripts del proyecto, importado módulos del proyecto, resuelto modelos ni reproducido simulaciones. Se han leído las páginas 5–16 y 43–46 del PDF extraído; se han inspeccionado visualmente las páginas 16 y 43. El PDF contiene secciones que no coinciden con `Latex/reto1.tex` (en particular, la nota del extra y el apéndice).
+
+## Hallazgos confirmados
+
+1. **Alta — El extra no es ejecutable como está entregado.** PDF p.15, §1.8. `reto1_extra/reto_1_extra.py:4` importa `plot_functions`; `reto1_extra/plot_functions.py:70` importa de forma incondicional `reto_3`, que no existe en esa carpeta (sí existe fuera, en `reto3_4_5/`). La ejecución normal desde la carpeta del extra aborta por módulo ausente antes de experimentar. Corrección: quitar ese import ajeno/no usado o mover los imports de las pruebas dentro de la guarda principal.
+
+2. **Alta — Fórmula equivocada en el apéndice.** PDF p.43, A.1, líneas de listado 26, 28–29: el producto usa caminos `i -> u -> j`, mientras se pondera con `p0[j]`, se usa el salto directo `e(j,i)` y el fallo directo `1-e(i,j)`. No implementa (1.9) para probabilidades asimétricas como las entregadas. Corrección con los mismos bucles: `inner_term = e(i,j) + (1-e(i,j))*(1-product)` y `E += p0[i]*inner_term` (sin bucles, el producto actual sobre todos los nodos no introduce problemas). La implementación real correcta está en `reto1/reto1_milp.py:95–104`. El `reto_1.py` del apéndice no existe entre los archivos entregados.
+
+3. **Media — El extra anunciado como s=5 calcula Q4.** PDF p.15, §1.8 dice s=5; `reto1_extra/reto_1_extra.py:44,64,68` fija `s=5` y etiqueta `E[|Q_5|]`. Pero `montecarlo.py:97` usa `range(1,s)` y `:125` usa `range(s)`: solo t=0,1,2,3,4. PDF p.12, (1.4), define Q_s incluyendo t=s. Corrección: distinguir horizonte s de número de estados s+1 y pasar 6 estados para calcular Q5, o reetiquetar Q4.
+
+4. **Media — El extra no implementa partes del método descrito.** PDF p.15, §1.8 promete mismos escenarios para todas las comparaciones y una búsqueda posterior por intercambios. `reto1_extra/reto_1_extra.py:20–36` hace exclusivamente greedy y llama de nuevo al simulador por cada candidata; `montecarlo.py:87,106` vuelve a sortear orígenes y monedas en cada llamada. `random.seed(4)` (`reto_1_extra.py:41`) una sola vez no reutiliza escenarios. No hay bucle de intercambio posterior. Corrección: describir el greedy con muestras nuevas realmente incluido, o implementar el banco fijo de escenarios y los intercambios. No hay resultados archivados `resultados_extra.txt` que permitan comprobar valores del extra.
+
+5. **Media — Contradicción sobre existencia de Monte Carlo.** PDF p.15 remite al código del extra; p.16 dice «La implementación del método de monte carlo no se ha implementado». El extra sí está escrito, aunque tiene los defectos anteriores. Corrección: aclarar que los dos scripts MILP solo cubren s=2 y separar el estado de la extensión.
+
+6. **Media — El apéndice presenta una heurística como óptima.** PDF pp.45–46, líneas 124 y 146 llaman a `greedy_edge_removals`; líneas 148–149 anuncian «Minimum» y «Number of optimal removal sets», y línea 156 guarda `grafo_optimo.png`. `len(best_removals)` en ese punto es el número de aristas greedy (4), no el número de soluciones óptimas. La enumeración exacta queda en un bloque `if False` (línea 159). Corrección: llamar resultado greedy/heurístico a esa salida o sustituir el apéndice por la implementación MILP utilizada por la tabla de p.16. Este problema no invalida por sí mismo la tabla MILP, cuyos registros sí certifican óptimo.
+
+7. **Baja — Los tiempos carecen de registro asociado en la entrega.** PDF p.16: 0.075/0.113/0.167/0.159/0.043/0.115 s. `reto1/resultados_reto1.csv:2–7`: 0.115499630/0.171792775/0.259148962/0.251560210/0.067426609/0.183356241 s. Puede ser otra ejecución, porque los tiempos varían, pero no se identifica su entorno/registro. Corrección: adjuntar el registro de la ejecución citada o documentar claramente a cuál corresponde la tabla. No se afirma que los números de tiempos sean falsos.
+
+8. **Media — Rutas documentadas inconsistentes.** PDF p.15 usa `reto_1_extra/reto_1_extra.py` pero la carpeta real es `reto1_extra`. `README.md:80,90` usa `cd reto1_milp_python`, carpeta inexistente; la carpeta real es `reto1`. También `:18,85` conservan esa denominación. Corrección: usar exactamente `reto1/` y `reto1_extra/`.
+
+## Elementos que sí cuadran
+
+Los comandos del PDF p.16 `python3 reto1_milp.py Datos/graph_003_probs.txt` y `python3 probar_todos.py Datos` tienen argumentos válidos al ejecutarse desde `reto1/`; no requieren flags adicionales porque `k=4` es el valor por defecto y el horizonte es fijo s=2. Las aristas cortadas, quemadas, salvadas y medias de la tabla del PDF coinciden con `resultados_reto1.csv` y la referencia archivada de enumeración. Los seis registros guardados tienen estado óptimo y gap cero. La formulación MILP y su evaluación directa leídas estáticamente concuerdan con (1.9).

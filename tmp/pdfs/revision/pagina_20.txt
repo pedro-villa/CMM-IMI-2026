@@ -1,0 +1,45 @@
+20CAPÍTULO 2. RETO 2
+Lema 2(Propagación acumulada).Para cualquier calendario yt≥1, en la Definición 4 podemos
+sustituir los recién quemadosNt−1por todos los quemadosBt−1sin cambiar el resultado:
+Bt =B t−1∪
+{︁
+v∈V:∃u∈Bt−1con(u,v)∈E\Ct
+}︁
+.
+2.4. Un ejemplo pequeño
+Ejemplo 1.Camino de cinco vértices con el fuego en el centro yk= 1(n= 5,H= 4):
+c a q b d
+corte en turno 1 corte en turno 2
+En el turno 1 cortamos(q,a )y el fuego pasa ab; en el turno 2 cortamos(b,d )y el fuego se detiene.
+Arden q y b, y no se puede mejorar: deq salen dos aristas y en el turno 1 solo se corta una. Las
+variables no idénticamente nulas son:
+t= 0t= 1t= 2t= 3t= 4
+Xqa,t 0 1 1 1 1
+Xbd,t 0 0 1 1 1
+bq,t 1 1 1 1 1
+bb,t 0 1 1 1 1
+Por ejemplo, para(q,a )en t = 1: bq,0 = 1≤ba,1 +Xqa,1 = 0 + 1(el corte protege aa); y para(q,b )
+en t = 3: bq,2 = 1≤bb,3 +Xqb,3 = 1 + 0, dondeq es un vértice “viejo” pero la restricción se cumple
+porquebya ardía (Lema 2). El objetivo vale∑︁
+vbv,4 = 2.
+2.5. Por qué el modelo proporciona la misma solución óptima que
+el problema original
+Las dos diferencias de nuestro modelo frente al problema original son: (A) el presupuesto es acumulado,
+no por turno, y (B) las variablesb pueden exagerar el incendio. Veamos que ninguna diferencia
+altera el óptimo. Usaremos una propiedad intuitiva, que se prueba por inducción sobretaplicando
+el Lema 2 a ambos calendarios:
+Lema 3(Cortar antes nunca perjudica).Si Ct⊆C′
+t para todot (en C′cada arista se corta en el
+mismo turno o antes), sus incendios cumplenB′
+t⊆Bt para todot.
+2.5.1. Diferencia (A): presupuesto acumulado
+∑︁
+eXe,t cuenta todos los cortafuegos colocados hasta el turnot; conk por turno son como muchokt,
+de ahí(2.5). Pero esta condición es más débil que la regla: permite, por ejemplo, no cortar nada en
+el turno1y cortar2karistas en el turno2.
+Ahorrar cortafuegos no sirve de nada
+Si un calendario “ahorra” en un turno para gastar más después, podemosadelantaresos cortes:
+se ordenan las aristas cortadas según su turno de corte y se reparten dek en k desde el turno
+1. Como|Ct|≤kt, toda arista queda cortada no más tarde de lo que se exigía en el calendario
+de presupuesto acumulado, y por el Lema 3 el nuevo calendario, que ya es admisible, quema lo
+mismo o menos. Ejemplo conk= 2:

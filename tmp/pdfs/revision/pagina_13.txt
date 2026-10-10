@@ -1,0 +1,109 @@
+1.6. EL CASOs= 2: AQUÍ SÍ SE PUEDE CALCULAR LA ESPERANZA13
+1−∑︁
+i≤tYi
+v vale 1 siv aún no ha ardido. La suma incluyei = 0para que el origen no vuelva a
+arder.
+Yt
+uXuv = 1si u está en el frente y su moneda haciav es 1. Entonces∏︁
+u(1−Yt
+uXuv) = 1si
+ningún vecino transmite, y el corchete es el indicador de que alguno lo hace (un «o» lógico).
+Con t = 0y t = 1se recuperan (1.6) y (1.7). La recursión genera todas las etapas a partir del
+origen y las monedas.
+La dificultad:(1.8)es exacta, pero no sabemos tomarle la esperanza fácilmente
+Parat≤2, las fórmulas(1.5)–(1.7) solo involucran el origen y
+monedas que, fijado el origen, son independientes, y se pueden
+promediar exactamente (§1.6). En general, la tentación es
+sustituir cada variable de (1.8) por su media:
+E[Yt+1
+v ]
+?
+≈
+(︂
+1−
+∑︂
+i≤t
+E[Yi
+v ]
+)︂[︂
+1−
+∏︂
+u̸=v
+(︁
+1−E[Yt
+u]puv
+)︁]︂
+.
+Es falso en general, porqueE[XY ] = E[X]E[Y ]solo vale con
+independencia y aquí no la hay
+l a
+u
+w
+v
+arco
+compartido
+1.6. El casos= 2: aquí sí se puede calcular la esperanza
+La clave: condicionado a un origen fijol, el frenteI1 está formado por monedas independientes
+(Y 1
+u =Xlu), y los caminos de dos saltosl→u→vusan arcos distintos para cadau. Etapa a etapa:
+Etapa 0.Y 0
+v =1{L=v}, luegoE[Y0
+v ] =πv.
+Etapa 1.Si el origen esl̸=v,varde en la etapa 1 exactamente siXlv = 1:
+Y 1
+v =
+∑︂
+l̸=v
+1{L=l}Xlv =⇒E[Y 1
+v ] =
+∑︂
+l̸=v
+πlplv
+(como mucho un indicador1{L=l}vale 1, así que no se cuenta nada dos veces, yL es independiente
+deX lv).
+Etapa 2. v arde por primera vez en la etapa 2 si falla el
+salto directol→vy funciona algún caminol→u→v. Es
+(1.8) cont= 1yY 1
+u =X lu:
+Y 2
+v =
+∑︂
+l̸=v
+1{L=l}⏞⏟⏟⏞
+origenl
+(1−Xlv)⏞⏟⏟⏞
+no ardió ent=1
+[︂
+1−
+∏︂
+u̸=l,v
+(1−XluXuv)
+]︂
+⏞ ⏟⏟ ⏞
+algún camino de 2 saltos funciona
+.
+Parau̸=w, los pares{Xlu,Xuv}y{Xlw,Xwv}son bloques
+disjuntos de variables aleatorias, y ninguno contieneXlv.
+Funciones de bloques disjuntos de variables independientes
+son independientes, así que ahora sí la esperanza del producto
+es el producto de esperanzas, conE[XluXuv] =p lupuv:
+E[Y 2
+v ] =
+∑︂
+l̸=v
+πl (1−plv)
+[︂
+1−
+∏︂
+u̸=l,v
+(1−plupuv)
+]︂
+.
+l v
+u1
+u2
+u3
+arco directo: debe fallar (1−plv)
+Figura 1.8:Etapa 2: los caminos l→
+u→vno comparten arcos (colores distin-
+tos) ni usan el arco directo.

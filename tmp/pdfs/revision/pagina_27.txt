@@ -1,0 +1,74 @@
+2.10. CONCLUSIONES27
+1
+1 2
+23
+3
+4
+4
+5
+1
+10
+17 14
+2 19
+15
+12
+13
+4 0
+18
+9
+16
+11
+8
+6
+3
+5
+7
+(a) Óptimo exacto: 10 salvadas
+11
+2
+23 3
+4
+4
+5
+1
+10
+17 14
+2 19
+15
+12
+13
+4 0
+18
+9
+16
+11
+8
+6
+3
+5
+7
+(b) Rollout anidadoπ2: 9 salvadas
+Figura 2.3.Comparación en graph_007 (mismos colores que en la Figura 2.1). En (a), el corte resaltado
+{12, 15}se coloca en el turno 1, cuando el fuego solo está en la zona 1: es un corteanticipado, fuera de la
+frontera.
+Por qué compensa adelantarse engraph_007
+La zona 1 tiene 5 vecinas y solo hay 2 cortafuegos, así que en el turno 1 arderán al menos tres
+de ellas, y sus vecinas están muy conectadas entre sí (la zona 19 tiene 8 vecinas). Cortar dos
+aristas de la frontera en el turno 1 salva poco. La solución óptima usa uno de sus dos cortafuegos
+paraprepararel turno 2: corta{12, 15}antes de que arda 15, y en el turno 2 le basta con cortar
+{0, 14}y{4, 15}para proteger a la vez las zonas 0, 4 y 12. Una política que solo corta en la
+frontera nunca puede hacer este movimiento.
+Una posible mejora del algoritmo es añadir a las candidatas las aristas que están a un paso de la
+frontera; el teorema de mejora sigue valiendo, a cambio de más simulaciones por turno.
+2.10. Conclusiones
+Respuestas a lo que pide el enunciado
+Método exacto general.El Modelo (P), con variables binarias acumuladas, da exacta-
+mente el óptimo del problema (§2.5). Se resuelve conbranch-and-cut(HiGHS), sin enumerar
+calendarios.
+Solución en graph_007 (q = 1, k = 2).Óptimo probado: arden 10 zonas y se salvan 10, con
+9 cortafuegos repartidos en 5 turnos (Figura 2.1).
+¿Exacto en grafos grandes?No. Hay muchísimos calendarios posibles, el modelo crece
+comon·m(unos108 binarios paran= 5.000) y su relajación lineal es débil.
+Algoritmo aproximado.Rollout anidadoπ2 sobre una heurística BFS local, con mejora
+garantizada en cada nivel. Salva de media 13,83 zonas en los seis grafos (óptimo: 14,00),
+alcanza el óptimo en 5 de 6 y es óptimo entre los calendarios que cortan en la frontera.

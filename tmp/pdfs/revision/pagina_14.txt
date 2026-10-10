@@ -1,0 +1,79 @@
+14CAPÍTULO 1. RETO 1
+Fórmula final.Agrupando plv + (1−plv)(1−Rlv) = 1−(1−plv)Rlv, conRlv =∏︁
+u̸=l,v(1−plupuv),
+y usando (1.4) y∑︁
+vπv = 1:
+E|Q2|= 1 +
+∑︂
+l∈N
+πl
+∑︂
+v̸=l
+[︂
+1−(1−plv)
+∏︂
+u̸=l,v
+(1−plupuv)
+⏞ ⏟⏟ ⏞
+P(vsobrevive a 2 etapas|L=l)
+]︂
+(1.9)
+El 1 es el origen (siempre arde) yπl pondera cada origen. En el ejemplo de la Fig. 1.1 daE|Q2|= 2.496,
+idéntico a sumar exactamente las4·256casillas de la Fig. 1.4, o los 39 incendios con (1.3).
+1.7. Los cortafuegos: modelo
+Modelo.Para cada arista no dirigida e∈Edecidimos, a priori,ye = 1(se conserva) o ye = 0
+(se corta, elimina ambos sentidos). Es una decisión determinista, no forma parte deω. Cortar, en
+nuestro modelo, no es una decisión que este presente en el espacio de probabilidad, cortar consiste
+en generar a partir de un grafo de probabilidades, otro similar pero conpij =pji = 0. A este nuevo
+grafo podemos asociarle una nueva tripleta(Ω′,P(Ω ′),P′)y calcularE|Qs|
+En otras palabras, para una decisión fijay, cortar equivale a sustituir cadaXij por
+˜︁Xij =y{i,j}Xij.
+Si se conserva la arista, la variable no cambia. Si se corta, pasa a valer cero. Como los valores dey
+son deterministas, las variables˜︁Xij siguen siendo independientes y
+E[˜︁Xij] =a ij(y) :=p ijy{i,j}.
+Por convenciónaij(y) = 0cuando(i,j)/∈A.
+Por tanto, el grafo cortado es otro caso del mismo modelo: las secciones 2–4, incluido el Teorema 1,
+siguen siendo aplicables, y (1.9) vale sustituyendoppora(y). El problema de optimización es
+m´ ın
+y∈{0,1}E
+F(y) = 1 +
+∑︂
+l∈N
+πl
+∑︂
+v∈N
+v̸=l
+⎡
+⎢⎢⎣1−
+(︁
+1−alv(y)
+)︁∏︂
+u∈N
+u̸=l,v
+(︁
+1−alu(y)auv(y)
+)︁
+⎤
+⎥⎥⎦,
+s.a.
+∑︂
+e∈E
+(1−ye) =k.
+(1.10)
+Aunque las restricciones son lineales, la función objetivo contiene productos de variables. Se trata,
+por tanto, de un problema de optimización binaria no lineal. Sin embargo, su estructura permite
+obtener una formulación lineal entera mixta equivalente, introduciendo variables auxiliares.
+Linealización.La idea básica es representar un producto mediante restricciones. Six∈[0, 1]e
+y∈{0,1}, la igualdadz=xyequivale a introducirz∈[0,1]e imponer
+z≤x, z≤y, z≥x+y−1.(1.11)
+En efecto, siy = 0, estas restricciones fuerzanz = 0y, si y = 1, fuerzanz =x. Esto incluye, en
+particular, el producto de dos variables binarias.
+Aplicamos esta idea construyendo sucesivamente cada producto de(1.10). Para un parl̸= v,
+enumeramos los intermediarios con caminosl→ur→vcomou1,...,um. Partimos de
+q0 = 1−alv(y)
+y queremos incorporar, en cada paso, un factor:
+qr =q r−1
+(︁
+1−cry{l,ur}y{ur,v}
+)︁
+, c r =p lurpurv.

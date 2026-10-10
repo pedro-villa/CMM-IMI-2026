@@ -1,0 +1,45 @@
+5.3. NODOS ACTIVOS DURANTE MÁS DE UN TURNO41
+Cómo abordarlo
+Siguiendo un algoritmo greedy similar al del Reto 3, basta con cambiar la manera de calcular los
+costes teniendo en cuenta las zonas quemadas con sus pesos ponderados en lugar de contabilizar
+únicamente el número de zonas quemadas.
+Implementación
+La implementación para esta variación del Reto 1 se puede encontrar en el ficheroreto_5_2.py
+5.3. Nodos activos durante más de un turno
+En el modelo base se asume que una zonai que se enciende en la etapat deja de estar activa en la
+etapa t + 1: o bien ha propagado el fuego a sus vecinas, o bien se ha extinguido. En un incendio real,
+una zona puede arder durante varias etapas consecutivas, y durante todo ese tiempo sigue siendo
+una fuente de propagación.
+Formulación.Introducimos una variable di∈Nque representa el número de etapas que la zonai
+permanece activa desde que se enciende. El modelo queda:
+En la etapat, el conjunto de zonas activas es
+At =
+{︁
+i∈V:ti≤t<ti +di
+}︁
+,
+dondet i es la etapa en queise encendió.
+Cada zona activai∈At intenta propagar el fuego a cada vecinaj no quemada con probabilidad
+pij, independientemente en cada etapaten queiesté activa.
+Una zona se considera quemada cuando deja de estar activa, es decir, en la etapati +di.
+Caso particular.Sid i = 1para todoi, se recupera exactamente el modelo de los Retos 1–4.
+Cómo abordarlo
+El método basado en simulación Montecarlo se debería de poder generalizar: en cada etapa, en
+lugar de propagar sólo desdeIt (las recién encendidas), se propaga desdeAt (todas las activas).
+El conjunto de “quemadas” se actualiza cuando una zona sale deAt. El algoritmo greedy del
+Reto 3 también se adapta: al evaluar el efecto de un cortafuegos, se simula el modelo multiturno
+con Ng realizaciones ysg etapas. La cota superior del número de etapas hasta la extinción pasa
+den−1a∑︁
+idi, que sigue siendo finita.
+5.4. Quemas de ensanche
+En el modelo de cortafuegos de los Retos 2–4, los bomberos cortan aristas impidiendo que el fuego
+salte de una zona a otra, pero no actúan sobre las zonas. En la práctica, una técnica habitual es
+la quema de ensanche, en la cual los bomberos provocan un incendio controlado en una franja de
+terreno delante del frente, de modo que cuando el incendio principal llegue a esa franja no encuentre
+combustible.
+Formulación.Introducimos una nueva acción de los bomberos: en cada etapa, además de (o en
+lugar de) cortark aristas, pueden quemar preventivamentem zonas no incendiadas que además no
+propagan el fuego. Formalmente, siBt⊆Ves el conjunto de zonas quemadas preventivamente en la
+etapat:
+Las zonas enBt se añaden al conjunto de zonas no disponibles.
+El fuego puede seguir propagándose a zonas no quemadas (ni por el incendio ni preventivamente).

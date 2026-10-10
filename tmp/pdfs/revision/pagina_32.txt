@@ -1,0 +1,30 @@
+32CAPÍTULO 3. RETO 3
+3. (0, 16)
+4. (10, 18)
+5. (12, 15)
+Recordemos que los cortafuegos se colocan antes de cada etapa. Por ejemplo, la arista(1, 6)se corta
+antes de la etapa 1, lo que impide que el fuego se propage del nodo 1 al nodo 6. En general vemos
+que el algoritmo casi siempre selecciona un cortafuegos correspondiente a una arista adyacente a un
+fuego activo.
+(a)Evolución del incendio con cortafuegos.
+ (b)Evolución del incendio sin cortafuegos.
+Figura 3.1:Comparación de la propagación del incendio con y sin estrategia de defensa. Grafograph_010,
+iteración 0.
+3.4. Condiciones experimentales
+Los experimentos se han realizado sobre los 6 grafos proporcionados, conq = 1y k = 1cortafuego
+por etapa. En total se han realizadoN = 100iteraciones para cada grafo, cada una cons = 20
+etapas como máximo, de manera que se asegura que el incendio se extingue. El tiempo de ejecución
+del ficheroreto_3.pyha sido de aproximadamente 1 minuto y 30 segundos.
+Parámetro Valor
+Iteraciones Montecarlo externasN= 100
+Etapas por iteracións= 20
+Iteraciones Montecarlo greedyN g = 50
+Horizonte greedys g = 3
+Cortafuegos por etapak= 1
+Elección de los parámetros
+s= 20conn= 20garantiza que el incendio se ha acabado en la última etapa o antes.
+Ng = 50y sg = 3han sido elegidos experimentalmente como el mejor equilibrio entre
+calidad de la estimación del greedy y coste computacional.
+3.5. Resultados
+Para cada grafo se obtienen la siguiente media de zonas salvadas sobre lasN = 100simulaciones
+externas:

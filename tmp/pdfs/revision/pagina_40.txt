@@ -1,0 +1,57 @@
+40CAPÍTULO 5. RETO 5
+propagar pero sí ha secado el combustible podemos tomar
+pij(t) =γ1/m(t) + (1−γ1/m(t))πij
+donde m(t)corresponde al número de zonas adyacentes aj y distintas dei que ardieron en
+etapas anteriores. La elección deγ1/m se debe a que la funcióna1/x es creciente y acotada
+superiormente por 1 paraa∈[0,1],x∈[0,∞).
+3.Escenario por etapas.
+Suponemos que antes del incendio se proporciona una secuencia{p(t)
+ij}s
+t=0 de probabilidades,
+una por etapa, estimada de alguna manera. Por ejemplo, estas probabilidades pueden haberse
+obtenido a partir de predicciones meteorológicas.
+Cómo abordarlo
+El algoritmo greedy–Montecarlo del Reto 3 se adapta sin cambios estructurales: basta con
+sustituir pij por pij(t)en la rutina de simulación Montecarlo. Por ejemplo, para el escenario
+por etapas, la decisión de cortafuegos en la etapat usa las probabilidadesp(t)
+ij vigentes. Si el
+viento sigue un proceso estocástico conocido, el Montecarlo debe simular también la evolución
+del viento.
+Implementación
+En el ficheroreto_5_1.py abordamos un caso simple de escenario por etapas en el que las
+probabilidades pij están moduladas por un factor aleatorio de ruido que las hace cambiar
+ligeramente durante cada etapa.
+5.2. Zonas con peso
+En el Reto 1 se asume implícitamente que todas las zonas valen lo mismo, ya que el objetivo es
+minimizar el número esperado de zonas quemadas, sin distinguir entre una zona de matorral y
+una zona con viviendas, una reserva natural o una explotación agrícola. En un escenario real, esta
+homogeneidad no es realista, ya que los bomberos priorizan la protección de núcleos habitados,
+infraestructuras críticas o hábitats protegidos. Formalizamos esta idea introduciendo un pesowi> 0
+asociado a cada zonai∈V.
+Formulación.Sea wi una medida del valor de la zonai. El daño causado por un incendio que
+quema el conjuntoQ⊆Vse define como
+D(Q) =
+∑︂
+i∈Q
+wi.
+El objetivo de los bomberos pasa a ser
+m´ ınE
+[︁
+D(Q)
+]︁
+= m´ ınE
+[︂∑︂
+i∈V
+wixi
+]︂
+,
+dondex i∈{0,1}indica si la zonaiacaba quemada.
+Relación con el modelo sin pesos
+El modelo de los Retos 1–4 se recupera tomandowi = 1para todo i∈V. Por tanto, todo el
+desarrollo algorítmico anterior sigue siendo válido; sólo cambia la función objetivo que se evalúa
+al final de cada simulación.
+Ejemplo 3(Ejemplo ilustrativo).Supongamos un grafo en el que sabemos que la duración del
+incendio ess= 1y hay zonas de inicio candidatas:
+q1: el fuego se propaga a 10 zonas de peso 1 (daño total10).
+q2: el fuego se propaga a 3 zonas de peso 5 (daño total15).
+Sin pesos, el incendiario elegiríaq1. Con pesos, eligeq2, porque el daño esperado es mayor.

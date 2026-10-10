@@ -1,0 +1,20 @@
+4.4. RESULTADOS 37
+4.4. Resultados
+La Tabla 4.1 resume, para cada grafo, la zona elegida por el incendiario y el daño esperado (zonas
+quemadas con bomberos).
+Grafo Zonaq ⋆ Daño esperado
+graph_00313 10.96
+graph_0041 12.6
+graph_0058 13.86
+graph_00719 12.84
+graph_00813 13.58
+graph_0103 10.9
+Tabla 4.1:Resultados del Reto 4.
+Reproducibilidad
+Todo el código está enreto_4.py, que fija random.seed(1) al inicio. Los resultados de la
+Tabla 4.1 se obtienen ejecutando dicho fichero con los 6 grafos enDatos/. El fichero de salida es
+results_reto_4/resultados.txt.
+4.5. Discusión: ¿esq ⋆realmente óptimo?
+El método propuesto es una aproximación, el Nivel 1 (bomberos) es una heurística greedy–Montecarlo,
+no una solución exacta. Por tanto,ˆ︁D(q)es una estimación del daño que el incendiario puede esperar
+si los bomberos usan esa heurística, no del daño bajo una respuesta verdaderamente óptima.

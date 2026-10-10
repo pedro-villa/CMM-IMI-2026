@@ -1,0 +1,6 @@
+# Dependencias comunes de todos los scripts Python de la entrega.
+# Entorno recomendado: Python 3.12 de 64 bits (tambien Python 3.11).
+numpy>=1.24,<3.0
+scipy>=1.9,<2.0
+networkx>=3.0,<4.0
+matplotlib>=3.7,<4.0

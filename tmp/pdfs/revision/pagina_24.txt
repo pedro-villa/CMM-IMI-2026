@@ -1,0 +1,59 @@
+24CAPÍTULO 2. RETO 2
+st+1 y, a partir de ahí, sigue aπj−1; es decir,ct =Jπj−1
+(︁
+st+1,πj−1(st+1)
+)︁
+. Y como enst+1 esa
+acción base vuelve a estar entre las candidatas, el mínimo elegido no puede ser peor:ct+1≤ct.
+Así,
+J(πj) =c último ≤ ··· ≤c2 ≤c1 ≤Jπj−1
+(︁
+s1,πj−1(s1)
+)︁
+=J(πj−1).
+La garantía es respecto a la política base y al conjunto de accionesAt (cortes en la frontera), no
+respecto al óptimo global; volveremos sobre esto en §2.9.1.
+2.8.1. Los tres niveles de la jerarquía
+π0:BFS local
+voraz y miope
+π1:rollout
+simula conπ0
+π2:rollout anidado
+simula conπ1
+mejora mejora
+Política baseπ0 (BFS local, algoritmo_bfs.py).Para cada arista de la frontera mira la
+zona sana a la que da acceso y cuenta cuántas zonas sanas hay a distancia≤rde ella (con
+r = 2) más su grado entre las sanas. Corta lask aristas con mayor puntuación, es decir, las
+que protegen más “masa” de bosque cercana. Es muy rápida, pero miope: no anticipa lo que
+pasará después.
+Rollout π1 (algoritmo_rollout.py).Aplica (2.10) conπ0 como base: evalúa por simulación
+todos los pares de aristas de la frontera (entre lasW = 24mejor puntuadas por π0, más
+siempre la acción deπ0) y se queda con el mejor.
+Rollout anidadoπ2 (reto2_rollout_anidado.py).Aplica la misma operación tomandoπ1
+como base. Los niveles internos, que solo se usan para simular y se llaman muchas veces, usan
+una ventana más estrecha deW= 16aristas.
+Para acelerar las simulaciones sin cambiar ninguna decisión se usan dos trucos: se evalúa primero la
+acción base (que suele ser buena) y se abandona la simulación de una acción en cuanto su número
+de quemados supera al de la mejor encontrada (poda por cota), lo cual es válido porque el número de
+quemados solo puede crecer.
+2.8.2. Pseudocódigo
+Algoritmo 1: política baseπ0 (BFS local)
+Entrada:grafoG, estado(Q t,It,C), presupuestok, radior.
+1S←V\Q t ▷zonas sanas
+2F←{{u,v}/∈C:u∈It, v∈S}▷fronteraδ(I t,St)
+3siF=∅devolver∅
+4para cadae={u,v}∈Fconv∈Shacer
+aR(e)←zonas deSalcanzables desdeven≤rpasos por aristas no cortadas▷BFS
+bpuntos(e)←|R(e)|+ #{w∈S:{v,w}/∈C}
+5devolverlaskaristas deFcon más puntos
+Algoritmo 2: mejora por rollout,πj =Rollout(πj−1,W)
+Entrada:estado(Q t,It,C), presupuestok, política baseπ, ventanaW.
+1F←fronteraδ(It,St);siF=∅devolver∅
+2a ∗←π(Qt,It,C);(J ∗,d ∗)←Simular(a∗,π,∞)▷la acción base, primero
+3L←lasWaristas deFcon más puntos segúnπ 0
+4para cadaa⊆Lcon|a|= m´ ın(k,|L|),a̸=a∗ hacer
+a(J,d)←Simular(a,π,(J∗,d ∗))
+bsiJ <J ∗ o(J=J ∗ yd<d ∗)entonces(a ∗,J ∗,d ∗)←(a,J,d)
+5devolvera ∗
+Simular(a,π,cota):▷coste de aplicaray seguir conπ
+1C←C∪a;N←{v /∈Q:∃u∈I,{u,v}∈E\C};d←|N|

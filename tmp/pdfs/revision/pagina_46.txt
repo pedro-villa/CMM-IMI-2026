@@ -1,0 +1,7 @@
+46APÉNDICE A. CÓDIGO
+163best_removals, best_value = find_best_edge_removals(edges, p0, k=4)
+164
+165print(f"Minimum E[|Q_2|] ={best_value}")
+166print(f"Number of optimal removal sets:{len(best_removals)}")
+167forcomboinbest_removals:
+168print(" Remove:", combo)

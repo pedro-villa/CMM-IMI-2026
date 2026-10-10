@@ -1,0 +1,6 @@
+graph_003_probs.txt	 best initial node = 13	 mean burnt = 10.96
+graph_004_probs.txt	 best initial node = 1	 mean burnt = 12.6
+graph_005_probs.txt	 best initial node = 8	 mean burnt = 13.86
+graph_007_probs.txt	 best initial node = 19	 mean burnt = 12.84
+graph_008_probs.txt	 best initial node = 14	 mean burnt = 13.58
+graph_010_probs.txt	 best initial node = 3	 mean burnt = 10.9

@@ -1,0 +1,182 @@
+[
+  {
+    "grafo": "graph_003_probs.txt",
+    "metodo": "enumeracion exhaustiva independiente; NO ejecucion MILP",
+    "combinaciones": 82251,
+    "cortes": [
+      [
+        6,
+        13
+      ],
+      [
+        10,
+        13
+      ],
+      [
+        10,
+        16
+      ],
+      [
+        11,
+        19
+      ]
+    ],
+    "quemadas": 4.668202204136559,
+    "quemadas_sin_cortes": 5.901600574098576,
+    "salvadas": 1.2333983699620168,
+    "tiempo_enumeracion_s": 2.4706231000018306,
+    "variables_binarias": 39,
+    "variables_continuas": 937,
+    "restricciones": 1737
+  },
+  {
+    "grafo": "graph_004_probs.txt",
+    "metodo": "enumeracion exhaustiva independiente; NO ejecucion MILP",
+    "combinaciones": 73815,
+    "cortes": [
+      [
+        4,
+        6
+      ],
+      [
+        7,
+        15
+      ],
+      [
+        9,
+        15
+      ],
+      [
+        12,
+        18
+      ]
+    ],
+    "quemadas": 5.184079495488064,
+    "quemadas_sin_cortes": 6.408739059204839,
+    "salvadas": 1.2246595637167754,
+    "tiempo_enumeracion_s": 2.2407997000045725,
+    "variables_binarias": 38,
+    "variables_continuas": 891,
+    "restricciones": 1651
+  },
+  {
+    "grafo": "graph_005_probs.txt",
+    "metodo": "enumeracion exhaustiva independiente; NO ejecucion MILP",
+    "combinaciones": 66045,
+    "cortes": [
+      [
+        3,
+        7
+      ],
+      [
+        6,
+        12
+      ],
+      [
+        8,
+        17
+      ],
+      [
+        16,
+        19
+      ]
+    ],
+    "quemadas": 5.0745541578460225,
+    "quemadas_sin_cortes": 6.414850782937114,
+    "salvadas": 1.3402966250910913,
+    "tiempo_enumeracion_s": 2.0350201000037487,
+    "variables_binarias": 37,
+    "variables_continuas": 845,
+    "restricciones": 1545
+  },
+  {
+    "grafo": "graph_007_probs.txt",
+    "metodo": "enumeracion exhaustiva independiente; NO ejecucion MILP",
+    "combinaciones": 111930,
+    "cortes": [
+      [
+        1,
+        15
+      ],
+      [
+        6,
+        18
+      ],
+      [
+        9,
+        19
+      ],
+      [
+        18,
+        19
+      ]
+    ],
+    "quemadas": 5.770065731533421,
+    "quemadas_sin_cortes": 7.047724974403614,
+    "salvadas": 1.2776592428701932,
+    "tiempo_enumeracion_s": 3.4537793999988935,
+    "variables_binarias": 42,
+    "variables_continuas": 1087,
+    "restricciones": 2043
+  },
+  {
+    "grafo": "graph_008_probs.txt",
+    "metodo": "enumeracion exhaustiva independiente; NO ejecucion MILP",
+    "combinaciones": 73815,
+    "cortes": [
+      [
+        0,
+        12
+      ],
+      [
+        3,
+        16
+      ],
+      [
+        8,
+        12
+      ],
+      [
+        9,
+        16
+      ]
+    ],
+    "quemadas": 5.17617524804768,
+    "quemadas_sin_cortes": 6.484088034737317,
+    "salvadas": 1.307912786689637,
+    "tiempo_enumeracion_s": 2.2089517999993404,
+    "variables_binarias": 38,
+    "variables_continuas": 909,
+    "restricciones": 1657
+  },
+  {
+    "grafo": "graph_010_probs.txt",
+    "metodo": "enumeracion exhaustiva independiente; NO ejecucion MILP",
+    "combinaciones": 101270,
+    "cortes": [
+      [
+        3,
+        15
+      ],
+      [
+        6,
+        16
+      ],
+      [
+        6,
+        17
+      ],
+      [
+        16,
+        17
+      ]
+    ],
+    "quemadas": 5.39050649716874,
+    "quemadas_sin_cortes": 6.830639354429917,
+    "salvadas": 1.440132857261177,
+    "tiempo_enumeracion_s": 3.0768095000021276,
+    "variables_binarias": 41,
+    "variables_continuas": 1071,
+    "restricciones": 2007
+  }
+]

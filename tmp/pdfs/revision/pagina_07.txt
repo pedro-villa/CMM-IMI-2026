@@ -1,0 +1,87 @@
+1.3. TODO INCENDIO SE REPRESENTA ELIGIENDO QUÉ ARCOS SE ACTIV AN7
+v∈It+1 tiene algún arco(u,v )∈Acon u∈It. LlamamosI al conjunto de todos los incendios y
+Qt =I 0∪···∪It.
+Por ejemplo,({1},{2},∅)es «empieza en 1, quema la 2 y se apaga». En el grafo de la Fig. 1.1 hay
+exactamente 39 incendios.
+Descodificar.Un código ω= (l,M )representa un incendio concreto, esto se hace simulando el
+incendio con las aristas activas. Aplicamos (R1)–(R4), pero en lugar de hacer un sorteo en cada
+intento leemos el resultado de la "moneda" que ya hemos tirado y viene reflejada en el código:
+I0 =Q 0 ={l}, It+1 ={v /∈Qt :∃u∈It conM uv = 1}, Qt+1 =Q t∪It+1,(1.2)
+hasta el primerT con IT = ∅. LlamamosΦ( ω) = (I0,...,IT ). Equivalentemente,v arde en la etapa
+t si y solo si su distancia al en la realizaciónM es exactamentet: el incendio es un recorrido en
+anchura (BFS) por los arcos activos (Fig. 1.3).
+1
+2
+3 4
+etapat= 0
+1
+2
+3 4
+etapat= 1
+1
+2
+3 4
+etapat= 2
+1
+2
+3 4
+etapat= 3
+fuera del horizontes= 2
+Figura 1.3:Descodificar el código(1,M 3), con arcos activos1→2,3→1,2→3,3→4. En naranja, el frenteIt.
+En rojo claro, lo ya quemado. En rojo grueso, el arco que transmite. ResultaΦ(1,M 3) = ({1},{2},{3},{4},∅).
+La moneda de3→1vale 1 pero no se usa (la 1 ya ardía), y la de1→3vale 0.
+Proposición 2(Todo incendio tiene código).Φ(Ω) = I: todo código produce un incendio, y todo
+incendio se obtiene de algún código.
+Demostración. (⊆) Por(1.2), los frentes son disjuntos (solo entran zonas fuera deQt), compatibles
+(solo se usan arcos deA) y el proceso se detiene enT≤netapas porque cada frente no vacío añade
+zonas nuevas. (⊇) DadoI∈I, activamos para cadav∈It+1 un arco(u,v )con u∈It, que existe por
+compatibilidad, y dejamos a 0 todos los demás. Al descodificar, cada etapa reproduce exactamente
+It+1.
+Así, elegir qué arcos se activan es un lenguaje completo para describir incendios, completo, pero no
+único, y de eso se ocupa §1.4. La Fig. 1.4 muestra el espacio entero como una tabla de códigos. En
+cada casilla, el incendio y por tanto|Q2|quedan fijados.
+1
+2
+3 4
+P(M1) = 0.003969
+1
+2
+3 4
+P(M2) = 0.001764
+1
+2
+3 4
+P(M3) = 0.002646
+1
+2
+3 4
+P(M4) = 0.004116
+···
+(256)
+l= 1,π1=0.5
+l= 2,π2=0.2
+l= 3,π3=0.2
+l= 4,π4=0.1
+|Q2|= 4
+|Q2|= 4
+|Q2|= 4
+|Q2|= 4
+|Q2|= 1
+|Q2|= 1
+|Q2|= 1
+|Q2|= 1
+|Q2|= 3
+|Q2|= 4
+|Q2|= 4
+|Q2|= 1
+|Q2|= 3
+|Q2|= 1
+|Q2|= 2
+|Q2|= 2
+···
+···
+···
+···
+Figura 1.4:El espacioΩdibujado. Columnas: realizaciones M del grafo de la Fig. 1.1 (arcos activos en rojo,
+hay2 8 = 256). Filas: orígenes. Cada casilla es un códigoω= (l,M )con masa πlP(M), donde P(M)es el
+producto de(1.1) sin el factorπl. En cada casilla, el número de zonas quemadas en 2 etapas es un número fijo.

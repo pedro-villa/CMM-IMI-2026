@@ -1,0 +1,25 @@
+42CAPÍTULO 5. RETO 5
+Comparación con los cortafuegos
+La quema de ensanche es, en cierto modo, más potente que el cortafuegos, puesto que “elimina”
+una zona entera (y por tanto todas sus aristas incidentes), mientras que un cortafuegos elimina
+una sola arista. En grafos con zonas de alto grado, la quema de ensanche es más eficiente por
+unidad de recurso, sin embargo, en grafos con zonas poco conectadas, el cortafuegos puede ser
+más útil ya que no requiere quemar una zona
+5.5. Aparición de fuegos espontáneos
+Una extensión que descartamos por considerarla poco realista en la escala temporal del modelo es la
+aparición de fuegos espontáneos, es decir, que en una etapat> 0se prenda una zonaj sin que haya
+existido propagación desde una zona activa.
+Desde nuestro punto de vista, el tiempo medio entre incendios espontáneos en un bosque determinado
+(por causas naturales como un rayo, o por negligencia humana) es del orden de meses, mientras que el
+ritmo de propagación del incendio, en cambio, es de horas por etapa. Es decir, la escala temporal del
+fenómeno de aparición espontánea es varios órdenes de magnitud mayor que la escala del fenómeno
+de propagación.
+Por otro lado, también podríamos considerar la “reactivación” de zonas quemadas. En este caso,
+creemos que lo más importante es tener en cuenta la granularidad temporal para distinguir casos. Si
+los pasos de tiempo son muy grandes, del orden de varias horas, es difícil que una zona que ha ardido
+vuelve a arder en el mismo incendio. Para que la reactivación tuviera sentido, habría que considerar
+un modelo con granularidad temporal muy fina (por ejemplo, etapas de pocos minuto) y zonas muy
+pequeñas. En tal caso podría tener más sentido modelar la reignición de una zona parcialmente
+quemada, aunque en este caso convendría también implementar un modelo de grados de quemado en
+cada zona (no quemada, parcialmente quemada, totalmente calcinada), lo que creemos que excede el
+alcance de este reto.

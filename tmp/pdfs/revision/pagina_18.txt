@@ -1,0 +1,53 @@
+18CAPÍTULO 2. RETO 2
+Instantet−1
+quemados: Bt−1
+Paso 1.Colocamos
+hasta k cortafuegos
+Paso 2.Propagan los
+recién quemadosNt−1
+Instantet
+quemados: Bt
+turnot
+En el paso 2 solo transmiten el fuego los vértices que se quemaron en el turno anterior (los “recién
+quemados”).
+Calendarios de cortes.Uncalendarioes una sucesión creciente ∅ =C0⊆C1⊆···, dondeCt
+son las aristas que ya tienen cortafuegos cuando el fuego se propaga en el turnot (crece porque los
+cortafuegos no se retiran). Es admisible si|Ct\Ct−1|≤kpara todot (lo que exigen las reglas) y
+de presupuesto acumulado si|Ct|≤kt(más permisivo; aparece en el modelo). Veremos en §2.5.1
+que todo calendario de presupuesto acumulado tiene asociado uno admisible que quema lo mismo o
+menos, de modo que ambos tipos dan el mismo valor óptimo.
+Definición 4(Evolución del incendio).Dado un calendario,B 0 =N 0 ={q}y, parat≥1,
+Nt =
+{︁
+v /∈Bt−1:∃u∈Nt−1con(u,v)∈E\Ct
+}︁
+, B t =B t−1∪Nt.
+El objetivo es elegir un calendario admisible que minimice el número final de vértices quemados.
+Lema 1(Cota temporal de expansión).Para cualquier calendario,Bt =BH para todot≥H:=n−1.
+En efecto, si un turno no quema a nadie, en el siguiente no hay quien transmita y el fuego se detiene
+para siempre. Así, cada turno hasta que se apaga quema al menos un vértice nuevo distinto deq, y
+solo hayn−1:
+N0 N1 N2 ···Nm ∅ ∅ ···
+{q}
+no vacíos y disjuntos, sinq⇒m≤n−1
+el fuego ya no vuelve
+Esto no significa que todo el grafo arda, sino que basta decidir los cortes de los turnos1,...,H.
+2.2. Variables binarias acumuladas
+Parae∈E,v∈Vyt= 0,...,H(escribimosX uv,t en lugar deX(u,v),t):
+Xe,t =
+{︄
+1,sieya tiene cortafuegos en el turnot(e∈C t),
+0,si sigue abierta;
+bv,t =
+{︄
+1,sivya se ha quemado en el instantet(v∈B t),
+0,en otro caso.
+Ambas variables sonacumuladas
+Xe,t = 1significa “yaestá cortada”, no “se cortaexactamenteent”; igual conbv,t. A lo largo del
+tiempo cada variable es una fila de ceros seguida de una de unos, y el salto marca cuándo ocurre
+el suceso:
+Xe,·= 0,...,0,1 ⏞⏟⏟⏞
+se coloca
+,1,...,1, b v,·= 0,...,0,1 ⏞⏟⏟⏞
+se quema
+,1,...,1.

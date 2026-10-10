@@ -1,0 +1,68 @@
+22CAPÍTULO 2. RETO 2
+La Figura 2.1 muestra el plan completo: el color de cada zona indica en qué turno arde, y cada arista
+cortada lleva el número del turno en que se coloca su cortafuegos.
+1
+1 2
+23
+3
+4
+4
+5
+1
+10
+17 14
+2 19
+15
+12
+13
+4 0
+18
+9
+16
+11
+8
+6
+3
+5
+7
+Turno Cortamos Arden|B t|
+0—1(foco)1
+1{1,19},{12,15}10,14,15,17 5
+2{0,14},{4,15}2,19 7
+3{12,19},{18,19}9 8
+4{8,9},{9,18}11,16 10
+5{8,11}nadie10
+arde en
+t= 0 t= 1 t= 2 t= 3 t= 4 salvada
+t cortafuegos colocado en el turnot
+Figura 2.1.Solución óptima degraph_007. El fuego se extingue en el turno 5, cuando el último cortafuegos
+aísla la zona 11.
+Fijémonos en el corte{12, 15}del turno 1: en ese momento solo arde la zona 1, así que el cortafuegos
+se colocapor adelantado, antes de que el fuego llegue a15. Este detalle será importante en §2.9.1.
+2.7. ¿Se puede resolver de forma exacta en grafos grandes?
+El enunciado del Reto 2 plantea explícitamente la siguiente cuestión:
+«¿Se puede resolver de forma exacta para grafos de tamaño grande? Si fuera imposible,
+proponed al menos un algoritmo que lo resuelva de forma aproximada...»
+La respuesta es negativa: aunque sí es teóricamente posible según la formulación anterior, no es para
+nada viable en grafos de gran tamaño. Hay dos motivos principales:
+1. El número de calendarios posibles es enorme. En cada turno hay que elegir hastak aristas entre
+las m del grafo, y lo que se decide en un turno condiciona todos los siguientes. Solo en el primer
+turno degraph_007 hay
+(︁42
+2
+)︁
+= 861parejas de aristas posibles, y el número de calendarios crece
+de forma combinatoria con los turnos y con el tamaño del grafo. En grafos con ciclos y muchos
+caminos por los que el fuego puede llegar a la vez, no es razonable esperar que un método exacto
+resuelva rápidamente cualquier instancia grande.
+2. El número de variables binarias crece comon·m. ComoH = n−1(Lema 1), el Modelo (P)
+tiene del orden den·mvariables binarias. Para un parque natural conn = 5.000parcelas y
+m= 15.000lindes,H= 4.999y harían falta
+Nvar = 4.999×15.000 + 5.000×5.000≈108 variables binarias,
+un modelo demasiado grande para resolverlo en la práctica con un solver de programación entera.
+Esta barrera computacional justifica diseñar algoritmos aproximados basados en control óptimo y
+programación dinámica, que es lo que hacemos a continuación.
+2.8. Jerarquía de políticas: rollout
+Para obtener una solución bien fundada y que escale a grafos grandes, construimos una jerarquía de
+aproximaciones sucesivas basada en la programación dinámica aproximada e iteración de políticas:
+partimos de una regla sencilla y la mejoramos simulando el futuro.

@@ -1,0 +1,60 @@
+2.6. EL MÉTODO EXACTO EN LA PRÁCTICA: SOLUCIÓN DEGRAPH_00721
+Presupuesto acumulado
+(factible en el modelo)
+k
+e1
+e2
+e3
+e4
+e5
+1 2 3
+turno
+vacío
+adelantar
+T ras adelantar
+(admisible)
+k
+e1
+e2
+e3
+e4
+e5
+1 2 3
+turno
+2.5.2. Diferencia (B): las variablesbpueden exagerar el incendio
+(2.4) obligaa marcar como quemados los vértices a los que llega el fuego, perono prohíbemarcar
+otros. En el Ejemplo 1 es factible ponerbd,t = 1para t≥1aunque d nunca arde; esa solución tiene
+objetivo3en vez de2:
+c a q b d bd,t = 1: factible, perodno arde.
+Objetivo3>2: la minimización lo descarta.
+Es decir, las restricciones describen “incendios posibles o peores”, y la minimización se queda con el
+verdadero: por inducción sobret, para cualquier(X,b )factible, todo vértice del incendio real que
+produceXtieneb v,t = 1.
+2.6. El método exacto en la práctica: solución degraph_007
+Implementación (reto2_exacto.py).Para resolver computacionalmente el Modelo (P) se ha
+programado un módulo en Python que usa la interfazscipy.optimize.milp del solver de progra-
+mación entera mixta HiGHS. En la práctica, para no tener que adelantar cortafuegos a posteriori
+(como se justificó en §2.5.1), el código impone directamente el presupuesto turno a turno:
+∑︂
+e∈E
+(︁
+Xe,t−Xe,t−1
+)︁
+≤k, t= 1,...,H,(2.8)
+conXe,0 = 0, de modo que toda solución factible es ya un calendario admisible que se puede ejecutar
+tal cual.
+En los ficheros de datos cada arco(i,j )aparece junto con(j,i )y, en este reto, todas las probabilidades
+valen1; por tanto el grafo es en la práctica no dirigido y un cortafuegos en la arista{u,v}bloquea
+los dos sentidos. El modelo tieneNvar =Hm + (H + 1)n variables binarias; engraph_007 (n = 20,
+m = 42, H = 19) son1198. Las restricciones(2.4), (2.6) y (2.8) se guardan en una matriz dispersa
+(formato COO, convertido a CSR) para que elbranch-and-cutsea eficiente.
+Verificación independiente.Como las restricciones permiten que algunasbv,t valgan1antes de
+tiempo sin cambiar el objetivo (§2.5.2), el calendario de cortes que devuelve el solver se comprueba
+siempre con una simulación independiente, la funciónpropagar(), que reproduce paso a paso la
+Definición 4. El número de vértices quemados que da la simulación,|BH|, debe coincidir con el valor
+óptimo del solver; en todos los grafos coincide.
+Solución óptima en graph_007 (q = 1, k = 2).Se ha ejecutado el método exacto sobre
+graph_007 (n = 20vértices, m = 42aristas) con el foco enq = 1y k = 2cortafuegos por turno.
+HiGHS termina con optimalidad probada en unos segundos, y la simulación confirma el resultado:
+10 zonas quemadas ·10 zonas salvadas
+Sin cortafuegos ardería el grafo entero (20 zonas).

@@ -1,0 +1,6 @@
+graph_003_probs.txt	 mean saved = 9.32
+graph_004_probs.txt	 mean saved = 5.72
+graph_005_probs.txt	 mean saved = 9.1
+graph_007_probs.txt	 mean saved = 6.61
+graph_008_probs.txt	 mean saved = 7.51
+graph_010_probs.txt	 mean saved = 12.04

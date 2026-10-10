@@ -1,0 +1,49 @@
+Capítulo 1
+Reto 1
+1.1. El problema
+El bosque es un grafo dirigido(N,A ), N ={1,...,n}, con
+(i,j)∈A⇐⇒(j,i)∈A: cada arista (frontera entre zonas)
+son dos arcos de sentidos opuestos, porque el fuego puede
+pasar más fácilmente en un sentido que en el otro. Los datos
+son números fijos:
+πl =P(el fuego empieza enl),
+pij =P(éxito del intentoi→j),
+con∑︁
+lπl = 1(πl es lapl del enunciado, la renombramos para
+no confundirla conpij). Convenimospij = 0si( i,j ) /∈A. El
+enunciado fija la dinámica:
+(R1) en la etapa0arde una única zona, lal con probabilidad
+πl:I 0 ={l}.
+(R2) cada zona deIt intenta quemar una única vez a cada
+vecina aún no quemada. El intentoi→jtiene éxito
+con probabilidadpij.
+(R3) que una zona queme a otra es independiente de el
+lugar de comienzo del incendio y de todas las otras
+expansiones del fuego que se hayan dado previamente.
+(R4)I t+1 son las zonas no quemadas hasta la etapa t:Qt =
+I0∪···∪It y que se queman en t+1. El proceso acaba
+en la etapaTconI T =∅.
+1
+2
+3 4
+0.6
+0.3
+0.5
+0.7
+π1=0.5
+π2=0.2
+π3=0.2
+π4=0.1
+Figura 1.1:Ejemplo que nos acompa-
+ñará. Cada arista son dos arcos (aquí
+con la mismap en ambos sentidos, aun-
+que podrían diferir). En azul, las proba-
+bilidades de inicio.
+Objetivo del reto.Elegir a priori k aristas que cortar (un cortafuegos elimina los dos arcos) para
+minimizarE|Qs|, el número esperado de zonas quemadas ensetapas. En el reto,k= 4ys= 2.
+El problema(R1)–(R4) describen el azar a medida que ocurre, y las probabilidades de cada
+etapa dependen de la historia (quién está en el frente, quién sigue sin quemar). PeroE|Qs|solo tiene
+sentido como esperanza de una variable aleatoria definida en un espacio(Ω,F,P ). ¿Qué espacio? ¿Y
+cómo sabemos que lo que calculemos en él es lo que pide el enunciado? Las tres secciones siguientes
+responden a esto.
+5

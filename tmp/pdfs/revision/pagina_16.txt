@@ -1,0 +1,41 @@
+16CAPÍTULO 1. RETO 1
+probar_todos.py: aplica el procedimiento a todos los grafos proporcionados y guarda sus
+resultados, junto con los tiempos de construcción del modelo y de resolución.
+Para resolver un único grafo:
+python3 reto1_milp.py Datos/graph_003_probs.txt
+Para resolver todos los grafos y guardar los resultados y tiempos:
+python3 probar_todos.py Datos
+Ambos comandos se ejecutan desde la carpeta que contiene los dos scripts y la carpetaDatos,
+incluido el fichero
+La carpeta en cuestion se encuentra en la raiz, y su nombre contiene "reto1"inicio.txt.
+Estos programas resuelven el casos = 2, utilizando la esperanza exacta la propuesta de Monte
+Carlo paras >2queda como extensión. Como comprobación, cada solución obtenida se evalúa
+también mediante la fórmula original(1.9), verificando que su valor coincide con el objetivo del
+modelo linealizado.
+La implementación del método de monte carlo no se ha implementado.
+Uso de inteligencia artificial.Hemos utilizado inteligencia artificial para generar el código
+que introduce en el solver las variables, restricciones y función objetivo del modelo matemático
+desarrollado. La resolución del problema y la certificación de optimalidad corresponden al solver, el
+código generado actúa como interfaz con este, por lo que refleja fielmente la formulación propuesta.
+1.10. Resultados
+Hemos ejecutadoprobar_todos.py sobre los 6 grafos de la carpetaDatos, conk = 4cortafuegos
+y horizontes = 2. Todas las esperanzas son exactas: el objetivo del MILP de §1.7 es la fórmula
+(1.9) evaluada en el grafo cortado, no una estimación por simulación. En los 6 grafos el solver
+HiGHS termina con estado óptimo, es decir, los cortes están certificados como óptimos. Las zonas se
+identifican con la numeración que usa el programa.
+Para cada grafo, las 4 aristas que corta la solución óptima, el número esperado de zonas salvadas y
+de zonas incendiadas ens= 2etapas que devuelve el programa y el tiempo que tarda el solver:
+Grafo Aristas cortadas
+Zonas salvadas
+esperadas (s= 2)
+Zonas incendiadas
+esperadas (s= 2)
+Tiempo del
+solver (s)
+graph_003{6,13},{10,13},{10,16},{11,19}1.233398 4.668202 0.075
+graph_004{4,6},{7,15},{9,15},{12,18}1.224660 5.184079 0.113
+graph_005{3,7},{6,12},{8,17},{16,19}1.340297 5.074554 0.167
+graph_007{1,15},{6,18},{9,19},{18,19}1.277659 5.770066 0.159
+graph_008{0,12},{3,16},{8,12},{9,16}1.307913 5.176175 0.043
+graph_010{3,15},{6,16},{6,17},{16,17}1.440133 5.390506 0.115
+Media 1.304010 5.210597

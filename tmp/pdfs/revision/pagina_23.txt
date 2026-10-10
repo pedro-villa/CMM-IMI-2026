@@ -1,0 +1,69 @@
+2.8. JERARQUÍA DE POLÍTICAS: ROLLOUT23
+Estado y acciones.En cada turnot≥1, el estado del sistema queda descrito por
+st =
+(︁
+Qt, It, Ct−1
+)︁
+,
+donde (con la notación de §2.1,Qt =B t−1eI t =N t−1):
+Qt⊆Vson los vértices quemados hasta ahora (Q1 ={q}) ySt =V\Q t los que siguen sanos;
+It⊆Qt es el frente activo, los vértices que propagan el fuego en este turno (I1 ={q});
+Ct−1⊆Eson las aristas ya cortadas.
+Las acciones se restringen a la frontera del incendio: las aristas abiertas que unen el frente activo
+con zonas sanas,
+δ(It,St) =
+{︁
+{u,v}∈E\Ct−1:u∈It, v∈St
+}︁
+,A t =
+{︁
+a⊆δ(It,St) :|a|≤k
+}︁
+.(2.9)
+quemadosQ t sanosS t
+fronteraδ(It,S t)
+•frente activoIt
+Se eligen hastakaristas
+de la frontera para cortar.
+Mejora de una política.Una política πes una regla que, en cada estado, elige una acción
+π(st)∈At. LlamamosJπ(st,a )al número total de vértices quemados cuando el fuego se extingue si
+en el turno actual aplicamos la acciónay en todos los turnos siguientes decidimos conπ. Como la
+propagación es determinista,Jπ(st,a)se calcula exactamente con una única simulación.
+Elrolloutconstruye una política mejor πj a partir de una política baseπj−1mirando un paso hacia
+delante:
+πj(st) = arg m´ ın
+a∈At
+(︂
+Jπj−1(st,a),|It+1(a)|
+)︂
+,(2.10)
+donde el número de contagios inmediatos|It+1(a)|sirve para desempatar (orden lexicográfico): ante
+dos acciones igual de buenas a largo plazo, preferimos la que deja menos fuego activo.
+estado st
+a1
+a2
+a3
+...
+se simula conπj−1
+hasta la extinción
+se simula conπj−1
+hasta la extinción
+se simula conπj−1
+hasta la extinción
+J= 12
+J= 9
+J= 11
+πj elige
+la mejor
+Teorema 2(Mejora monótona).Si la acción de la política base,πj−1(st), se incluye siempre entre
+las acciones evaluadas, entonces
+J(πj)≤J(πj−1)para todoj≥1,
+donde J(π)es el número final de vértices quemados al seguirπdesde el foco. En consecuencia,
+J(π2)≤J(π1)≤J(π0).
+Por qué la mejora está garantizada
+Seas1,s 2,...latrayectoriaquesigue πj,yllamemos ct =Jπj−1
+(︁
+st,πj(st)
+)︁
+alcosteque πj “predice”
+en el turnot. Como la dinámica es determinista, la simulación que dioct pasa exactamente por
