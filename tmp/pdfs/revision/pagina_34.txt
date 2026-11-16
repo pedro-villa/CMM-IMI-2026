@@ -1,7 +1,0 @@
-34CAPÍTULO 3. RETO 3
-Análisis comparativo
-El uso de números aleatorios comunes y la poda de aristas no solo reducen el tiempo de ejecución
-en órdenes de magnitud frente al enfoque por fuerza bruta, sino que incrementan sensiblemente
-el número medio de zonas salvadas (notable engraph_004 de 5.72 a 8.17 y engraph_007 de
-6.61 a 8.52) al evitar que aristas subóptimas sean seleccionadas por simple ruido estocástico
-favorable.

@@ -1,9 +1,0 @@
-38CAPÍTULO 4. RETO 4
-4.6. Visualización de los nodos seleccionados
-(a)Grafograph_003.
- (b)Grafograph_004.
-(c)Grafograph_005.
- (d)Grafograph_007.
-(e)Grafograph_008.
- (f)Grafograph_010.
-Figura 4.1:Representación de los grafos considerados en los experimentos para una de las iteraciones.

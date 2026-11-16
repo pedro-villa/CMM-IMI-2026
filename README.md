@@ -91,22 +91,22 @@ CMM-IMI-2026/
 ### Reto 1: Optimización Exacta MILP con Probabilidades
 - **Objetivo:** Minimizar el número esperado de nodos quemados $\mathbb{E}[|Q_2|]$ en un horizonte de dos etapas ($t=0,1,2$), seleccionando exactamente $k=4$ cortes de aristas no dirigidas de forma preventiva.
 - **Fundamento Matemático:** Para cada nodo susceptible, la probabilidad de no contagio $S_{lv}$ se factoriza en caminos directos e indirectos de dos saltos. El modelo linealiza exactamente los productos continuo-binario ($w = q \cdot y_e$) mediante envolventes exactas sin recurrir a discretizaciones ni relajaciones aproximadas.
-- **Solver:** HiGHS via `scipy.optimize.milp`. Los resultados óptimos han sido verificados contra enumeración exhaustiva ([referencia_enumeracion.json](file:///c:/Users/pedro/GitHub/CMM-IMI-2026/reto1/referencia_enumeracion.json)).
+- **Solver:** HiGHS via `scipy.optimize.milp`. Los resultados óptimos han sido verificados contra enumeración exhaustiva ([referencia_enumeracion.json](reto1/referencia_enumeracion.json)).
 
 ### Reto 1 (Extra): Enfoque Voraz y Simulación
 - Extensión para horizontes más largos ($s=5$) y presupuesto $k=4$, utilizando selección voraz guiada por estimaciones de Monte Carlo ($N=1000$) y visualización comparativa de grafos salvados frente a indefensos.
 
 ### Reto 2: Contención Dinámica Determinista (MILP y Rollout Anidado)
 - **Objetivo:** Contener un incendio determinista ($p_{ij}=1$) que inicia en el foco $q=1$, disponiendo de un presupuesto estricto de $k=2$ cortafuegos por turno colocados de manera reactiva.
-- **Modelo Exacto ([reto2_exacto.py](file:///c:/Users/pedro/GitHub/CMM-IMI-2026/reto2/reto2_exacto.py)):** Formulación ILP en variables binarias acumuladas ($X_{e,t}$ para cortes y $b_{v,t}$ para nodos quemados) sobre un horizonte finito $H = n - 1$.
-- **Heurística Voraz BFS ([algoritmo_bfs.py](file:///c:/Users/pedro/GitHub/CMM-IMI-2026/reto2/algoritmo_bfs.py)):** Resuelve una mochila discreta 0-1 en el cociclo frontera del fuego, ponderada por la conectividad local de radio $r$.
-- **Rollout Anidado ([reto2_rollout_anidado.py](file:///c:/Users/pedro/GitHub/CMM-IMI-2026/reto2/reto2_rollout_anidado.py)):** Implementa iteración de políticas (*Nested Rollout*, Bertsekas) de nivel 2 con podas *Branch & Bound*. Corrige la miopía de la BFS en grafos complejos (por ejemplo, en `graph_008` reduce de 10 a 9 quemados, igualando el óptimo teórico exacto del MILP).
+- **Modelo Exacto ([reto2_exacto.py](reto2/reto2_exacto.py)):** Formulación ILP en variables binarias acumuladas ($X_{e,t}$ para cortes y $b_{v,t}$ para nodos quemados) sobre un horizonte finito $H = n - 1$.
+- **Heurística Voraz BFS ([algoritmo_bfs.py](reto2/algoritmo_bfs.py)):** Resuelve una mochila discreta 0-1 en el cociclo frontera del fuego, ponderada por la conectividad local de radio $r$.
+- **Rollout Anidado ([reto2_rollout_anidado.py](reto2/reto2_rollout_anidado.py)):** Implementa iteración de políticas (*Nested Rollout*, Bertsekas) de nivel 2 con podas *Branch & Bound*. Corrige la miopía de la BFS en grafos complejos (por ejemplo, en `graph_008` reduce de 10 a 9 quemados, igualando el óptimo teórico exacto del MILP).
 
 ### Retos 3, 4 y 5: Dinámica Estocástica y Voraz Alternante
-- **Reto 3 ([reto_3.py](file:///c:/Users/pedro/GitHub/CMM-IMI-2026/reto3_4_5/reto_3.py)):** Algoritmo *Alternating Greedy* sobre simulaciones de Monte Carlo ($N=100$, $s=20$, $k=1$). En cada turno se elige el mejor cortafuegos local y se avanza la propagación estocástica, contrastando contra la red sin defensas.
-- **Reto 3 Alternativo ([reto_3_alternativo.py](file:///c:/Users/pedro/GitHub/CMM-IMI-2026/reto3_4_5/reto_3_alternativo.py)):** Versión altamente optimizada mediante podas del cociclo frontera, reducción de varianza con Números Aleatorios Comunes (CRN) y memoización de estados (*DP Cache*), acelerando drásticamente el cálculo y mejorando la tasa de nodos salvados.
-- **Reto 4 ([reto_4.py](file:///c:/Users/pedro/GitHub/CMM-IMI-2026/reto3_4_5/reto_4.py)):** Perspectiva del incendiario: análisis bi-nivel para identificar la zona de inicio $q^\star$ que maximiza el daño frente a la defensa dinámica.
-- **Reto 5.1 & 5.2 ([reto_5_1.py](file:///c:/Users/pedro/GitHub/CMM-IMI-2026/reto3_4_5/reto_5_1.py), [reto_5_2.py](file:///c:/Users/pedro/GitHub/CMM-IMI-2026/reto3_4_5/reto_5_2.py)):** Sensibilidad frente a perturbaciones estocásticas por etapas (`graph_010`) y simulación a gran escala ($N=1000$) con distribuciones generales (`inicio.txt`).
+- **Reto 3 ([reto_3.py](reto3_4_5/reto_3.py)):** Algoritmo *Alternating Greedy* sobre simulaciones de Monte Carlo ($N=100$, $s=20$, $k=1$). En cada turno se elige el mejor cortafuegos local y se avanza la propagación estocástica, contrastando contra la red sin defensas.
+- **Reto 3 Alternativo ([reto_3_alternativo.py](reto3_4_5/reto_3_alternativo.py)):** Versión altamente optimizada mediante podas del cociclo frontera, reducción de varianza con Números Aleatorios Comunes (CRN) y memoización de estados (*DP Cache*), acelerando drásticamente el cálculo y mejorando la tasa de nodos salvados.
+- **Reto 4 ([reto_4.py](reto3_4_5/reto_4.py)):** Perspectiva del incendiario: análisis bi-nivel para identificar la zona de inicio $q^\star$ que maximiza el daño frente a la defensa dinámica.
+- **Reto 5.1 & 5.2 ([reto_5_1.py](reto3_4_5/reto_5_1.py), [reto_5_2.py](reto3_4_5/reto_5_2.py)):** Sensibilidad frente a perturbaciones estocásticas por etapas (`graph_010`) y simulación a gran escala ($N=1000$) con distribuciones generales (`inicio.txt`).
 
 ---
 
@@ -116,7 +116,7 @@ Se recomienda **Python 3.12 de 64 bits** (también compatible con Python 3.11).
 
 1. **Clonar el repositorio:**
    ```bash
-   git clone https://github.com/TU_USUARIO/CMM-IMI-2026.git
+   git clone https://github.com/pedro-villa/CMM-IMI-2026.git
    cd CMM-IMI-2026
    ```
 
